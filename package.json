@@ -4,7 +4,27 @@
   "engines": {
     "node": ">=14.x"
   },
+  "main": "cli.js",
+  "type": "module",
+  "bin": "cli.js",
+  "scripts": {
+    "build": "npx swc ./index.js -o dist/index.js --config-file ./.swcrc && npx swc ./cli.js -o dist/cli.js --config-file ./.swcrc",
+    "start": "npm run build && node ./dist/index.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest ./test/md-links.spec.js"
+  },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "chalk": "^5.0.1",
+    "chalk-animation": "^2.0.2",
+    "figlet": "^1.5.2",
+    "gradient-string": "^2.0.1",
+    "inquirer": "^8.2.4",
+    "nanospinner": "^1.1.0",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.177",
+    "jest": "^29.2.2"
   }
 }

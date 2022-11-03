@@ -1,11 +1,15 @@
-const nodePath = require("path");
-const fs = require("node:fs");
-const axios = require("axios");
+import nodePath from "path";
+import fs from "node:fs";
+import axios from "axios";
 
 const mdLinks = (path, options = { validate: false }) => {
   return new Promise((resolve, reject) => {
     if (!path) {
       reject(new Error("No path"));
+    }
+
+    if (!fs.existsSync(path)) {
+      reject(new Error("No existe el path"));
     }
 
     if (!nodePath.isAbsolute(path)) {
@@ -69,10 +73,8 @@ const validate = (link) => {
   return axios.get(href).then(responseHandler, responseHandler);
 };
 
-mdLinks("./dir/README.md", { validate: true })
-  .then(console.log)
-  .catch(console.error);
+//mdLinks("./dir/README.md", { validate: true }).then(console.log).catch(console.error);
 //mdLinks('./dir').then(console.log).catch(console.log);
 //mdLinks('./dir/README.md', {validate:true}).then(console.log).catch(console.log);
 
-module.exports = mdLinks;
+export default mdLinks;
