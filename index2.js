@@ -28,7 +28,7 @@ export const handleResponse = (link, response) => {
 export const getValidatePromise = (link) => {
   const { href } = link;
   return axios.get(href)
-    .then((response) => handleResponse(link, response), (response) => handleResponse(link, response));
+    .then((response) => handleResponse(link, response)).catch((response) => handleResponse(link, response));
 };
 
 export const getLinks = (content, file) => {
